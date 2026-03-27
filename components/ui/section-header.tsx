@@ -24,10 +24,15 @@ export function SectionHeader({
       )}
     >
       {eyebrow ? <span className="eyebrow">{eyebrow}</span> : null}
-      <h2 className="thai-heading mt-5 text-3xl font-semibold leading-tight sm:text-4xl lg:text-[2.65rem]">
+      <h2
+        className={cn(
+          "thai-heading text-balance mt-4 text-[1.9rem] font-semibold leading-[1.15] sm:mt-5 sm:text-[2.3rem] sm:leading-[1.16] lg:text-[2.5rem]",
+          align === "center" ? "mx-auto max-w-[16ch]" : "max-w-[18ch]"
+        )}
+      >
         {title}
       </h2>
-      <p className="mt-4 max-w-[40rem] text-[14px] leading-7 text-slate-500 sm:text-[15px]">
+      <p className="text-pretty mt-3 max-w-[40rem] text-sm leading-7 text-slate-500 sm:mt-4 sm:text-[15px]">
         {description}
       </p>
     </div>

@@ -9,12 +9,22 @@ import { GlassCard } from "@/components/ui/glass-card";
 import { PremiumButton } from "@/components/ui/premium-button";
 import { formatPrice } from "@/lib/utils";
 import { createPaymentSession } from "@/services/payment";
-import { Course } from "@/types";
 
 const fieldClassName =
   "h-12 w-full rounded-2xl border border-slate-200/80 bg-white/95 px-4 text-sm text-ink-900 shadow-[0_10px_28px_-18px_rgba(15,23,42,0.12)] outline-none transition duration-300 placeholder:text-slate-400 focus:border-brand-400 focus:ring-4 focus:ring-brand-100";
 
-export function CheckoutForm({ course }: { course: Course }) {
+type CheckoutCourseSummary = {
+  id: string;
+  slug: string;
+  title: string;
+  shortDescription: string;
+  level: string;
+  duration: string;
+  lessons: number;
+  price: number;
+};
+
+export function CheckoutForm({ course }: { course: CheckoutCourseSummary }) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [errorMessage, setErrorMessage] = useState("");

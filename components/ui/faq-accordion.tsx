@@ -11,28 +11,34 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3 sm:space-y-4">
       {items.map((item, index) => {
         const isOpen = openIndex === index;
+        const panelId = `faq-panel-${index}`;
 
         return (
           <div
             key={item.question}
-            className="reveal-on-scroll reveal-right overflow-hidden rounded-[28px] border border-white/70 bg-white/80 shadow-panel backdrop-blur"
+            className="reveal-on-scroll reveal-right overflow-hidden rounded-[24px] border border-white/70 bg-white/80 shadow-panel backdrop-blur sm:rounded-[28px]"
             data-stagger={index}
           >
             <button
               type="button"
-              className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left sm:px-7"
+              aria-expanded={isOpen}
+              aria-controls={panelId}
+              className="flex w-full items-center justify-between gap-3 px-4 py-4 text-left sm:gap-4 sm:px-7 sm:py-5"
               onClick={() => setOpenIndex(isOpen ? null : index)}
             >
-              <span className="text-base font-semibold text-ink-900">{item.question}</span>
-              <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-50 text-xl leading-none text-ink-900">
+              <span className="text-pretty text-[15px] font-semibold leading-7 text-ink-900 sm:text-base">{item.question}</span>
+              <span className="flex h-9 w-9 items-center justify-center rounded-2xl bg-slate-50 text-xl leading-none text-ink-900 sm:h-10 sm:w-10">
                 {isOpen ? "−" : "+"}
               </span>
             </button>
             {isOpen ? (
-              <div className="border-t border-slate-100 px-6 py-5 text-sm leading-8 text-slate-500 sm:px-7">
+              <div
+                id={panelId}
+                className="text-pretty border-t border-slate-100 px-4 py-4 text-sm leading-7 text-slate-500 sm:px-7 sm:py-5 sm:leading-8"
+              >
                 {item.answer}
               </div>
             ) : null}

@@ -32,14 +32,14 @@ export function Navbar() {
 
           <nav className="hidden items-center gap-7 md:flex">
             {navItems.map((item) => (
-              <Link key={item.href} href={item.href} prefetch className="nav-link hover:-translate-y-0.5">
+              <Link key={item.href} href={item.href} prefetch={false} className="nav-link hover:-translate-y-0.5">
                 {item.label}
               </Link>
             ))}
           </nav>
 
           <div className="hidden md:block">
-            <PremiumButton href="/checkout" size="lg">
+            <PremiumButton href="/courses" size="lg">
               สมัครเรียน
             </PremiumButton>
           </div>

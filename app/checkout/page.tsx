@@ -21,6 +21,16 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
   const params = await searchParams;
   const selectedCourse = params?.course ? getCourseBySlug(params.course) : courses[0];
   const fallbackCourse = selectedCourse ?? courses[0];
+  const checkoutCourse = {
+    id: fallbackCourse.id,
+    slug: fallbackCourse.slug,
+    title: fallbackCourse.title,
+    shortDescription: fallbackCourse.shortDescription,
+    level: fallbackCourse.level,
+    duration: fallbackCourse.duration,
+    lessons: fallbackCourse.lessons,
+    price: fallbackCourse.price
+  };
 
   return (
     <div>
@@ -48,7 +58,7 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
       </SectionContainer>
 
       <SectionContainer className="section-contrast">
-        <CheckoutForm course={fallbackCourse} />
+        <CheckoutForm course={checkoutCourse} />
       </SectionContainer>
     </div>
   );

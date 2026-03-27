@@ -44,17 +44,7 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
               title="หลักสูตรคณิตศาสตร์ที่ออกแบบเพื่อผลลัพธ์และความเชื่อมั่นของผู้เรียน"
               description="เลือกคอร์สตามระดับชั้นหรือเป้าหมายการเรียน ตั้งแต่การปูพื้นฐาน เพิ่มเกรด ไปจนถึงโปรแกรมเตรียมสอบแบบเข้มข้น"
             />
-            <div className="grid gap-4 sm:grid-cols-2">
-              {[
-                ["3 ขั้น", "ปรับพื้นฐาน เสริมความแม่น ต่อยอดสู่โจทย์สอบ"],
-                ["สมัครได้ทันที", "เลือกคอร์สและเริ่มขั้นตอนสมัครเรียนได้สะดวก"]
-              ].map(([title, description]) => (
-                <div key={title} className="rounded-[24px] bg-white/80 p-5 shadow-sm backdrop-blur">
-                  <p className="text-lg font-semibold text-ink-900">{title}</p>
-                  <p className="mt-2 text-sm leading-7 text-slate-500">{description}</p>
-                </div>
-              ))}
-            </div>
+          
           </div>
         </GlassCard>
       </SectionContainer>
@@ -70,6 +60,7 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
                 <Link
                   key={category}
                   href={href}
+                  prefetch={false}
                   className={cn(
                     "whitespace-nowrap rounded-2xl px-4 py-3 text-sm font-semibold transition duration-300 sm:px-5",
                     isActive
@@ -94,14 +85,14 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
             {" "}
             <span className="font-semibold text-ink-900">{selectedCategory}</span>
           </p>
-          <PremiumButton href="/checkout" variant="secondary" className="w-full sm:w-auto">
-            สมัครเรียนทันที
+          <PremiumButton href="/contact" variant="secondary" className="w-full sm:w-auto">
+            ปรึกษาก่อนสมัคร
           </PremiumButton>
         </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div id="course-results" className="mt-10 grid grid-cols-2 gap-3 sm:gap-6 xl:grid-cols-3">
           {filteredCourses.map((course) => (
-            <CourseCard key={course.id} course={course} />
+            <CourseCard key={course.id} course={course} compactOnMobile />
           ))}
         </div>
       </SectionContainer>
