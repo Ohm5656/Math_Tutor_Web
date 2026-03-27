@@ -36,22 +36,10 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
 
   return (
     <div>
-      <SectionContainer className="page-hero pattern-dots pt-8 sm:pt-10">
-        <GlassCard className="spotlight-panel overflow-hidden p-6 sm:p-8 lg:p-10">
-          <div className="grid gap-8 lg:grid-cols-[1fr,0.8fr] lg:items-end">
-            <SectionHeader
-              eyebrow="Course Programs"
-              title="หลักสูตรคณิตศาสตร์ที่ออกแบบเพื่อผลลัพธ์และความเชื่อมั่นของผู้เรียน"
-              description="เลือกคอร์สตามระดับชั้นหรือเป้าหมายการเรียน ตั้งแต่การปูพื้นฐาน เพิ่มเกรด ไปจนถึงโปรแกรมเตรียมสอบแบบเข้มข้น"
-            />
-          
-          </div>
-        </GlassCard>
-      </SectionContainer>
-
+      
       <SectionContainer className="section-contrast">
-        <div className="-mx-1 overflow-x-auto pb-2">
-          <div className="flex w-max min-w-full items-center gap-3 px-1">
+        <div className="-mx-1 overflow-x-auto pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex w-max min-w-full snap-x snap-mandatory items-center gap-3 px-1">
             {courseCategories.map((category) => {
               const isActive = selectedCategory === category;
               const href = category === "ทั้งหมด" ? "/courses" : `/courses?category=${encodeURIComponent(category)}`;
@@ -62,7 +50,7 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
                   href={href}
                   prefetch={false}
                   className={cn(
-                    "whitespace-nowrap rounded-2xl px-4 py-3 text-sm font-semibold transition duration-300 sm:px-5",
+                    "snap-start whitespace-nowrap rounded-2xl px-4 py-3 text-sm font-semibold transition duration-300 sm:px-5",
                     isActive
                       ? "bg-[linear-gradient(135deg,#0f172a_0%,#1d4ed8_100%)] text-white shadow-glow"
                       : "border border-slate-200/80 bg-white/80 text-slate-600 shadow-sm backdrop-blur hover:-translate-y-0.5 hover:border-slate-300 hover:text-ink-900"
@@ -75,24 +63,22 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-slate-500">
-            แสดงผล
-            {" "}
-            <span className="font-semibold text-ink-900">{filteredCourses.length}</span>
-            {" "}
-            หลักสูตรในหมวด
-            {" "}
-            <span className="font-semibold text-ink-900">{selectedCategory}</span>
-          </p>
+        <div className="mt-8 flex flex-col items-start gap-4 rounded-[24px] border border-slate-200/70 bg-white/70 px-4 py-4 shadow-[0_18px_40px_-30px_rgba(15,23,42,0.14)] backdrop-blur sm:flex-row sm:items-center sm:justify-between sm:px-5">
+          <div>
+            <p className="text-sm font-medium text-slate-500">กำลังดูหมวด</p>
+            <p className="mt-1 text-sm text-slate-500">
+              พบ <span className="font-semibold text-ink-900">{filteredCourses.length}</span> คอร์สในหมวด{" "}
+              <span className="font-semibold text-ink-900">{selectedCategory}</span>
+            </p>
+          </div>
           <PremiumButton href="/contact" variant="secondary" className="w-full sm:w-auto">
             ปรึกษาก่อนสมัคร
           </PremiumButton>
         </div>
 
-        <div id="course-results" className="mt-10 grid grid-cols-2 gap-3 sm:gap-6 xl:grid-cols-3">
+        <div id="course-results" className="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3">
           {filteredCourses.map((course) => (
-            <CourseCard key={course.id} course={course} compactOnMobile />
+            <CourseCard key={course.id} course={course} />
           ))}
         </div>
       </SectionContainer>

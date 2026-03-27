@@ -15,28 +15,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div>
-      <SectionContainer className="page-hero pattern-dots pt-8 sm:pt-10">
-        <GlassCard className="spotlight-panel p-6 sm:p-8 lg:p-10">
-          <div className="grid gap-8 lg:grid-cols-[1fr,0.9fr]">
-            <SectionHeader
-              eyebrow="About Prime Math Academy"
-              title="สถาบันคณิตศาสตร์ที่ให้ความสำคัญกับความเข้าใจจริงและผลลัพธ์ของผู้เรียน"
-              description="เราเชื่อว่าการเรียนคณิตศาสตร์ที่ดีต้องทั้งเข้าใจง่าย วางระบบชัดเจน และทำให้ผู้เรียนรู้สึกมั่นใจพอที่จะพัฒนาต่อได้จริง"
-            />
-            <div className="grid gap-4 sm:grid-cols-2">
-              {[
-                ["พันธกิจ", "ทำให้คณิตศาสตร์เป็นวิชาที่ผู้เรียนเข้าใจและกล้าเผชิญโจทย์จริง"],
-                ["วิสัยทัศน์", "เป็นแบรนด์กวดวิชาคณิตศาสตร์ออนไลน์ที่ครอบครัวไทยไว้วางใจในระยะยาว"]
-              ].map((item) => (
-                <div key={item[0]} className="rounded-[24px] bg-white/80 p-5 shadow-sm backdrop-blur">
-                  <p className="text-lg font-semibold text-ink-900">{item[0]}</p>
-                  <p className="mt-2 text-sm leading-7 text-slate-500">{item[1]}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </GlassCard>
-      </SectionContainer>
+  
 
       <SectionContainer className="section-contrast">
         <div className="grid gap-6 lg:grid-cols-[1.05fr,0.95fr]">

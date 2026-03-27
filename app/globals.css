@@ -21,12 +21,14 @@ html[data-scroll-behavior="smooth"] {
 @keyframes page-enter {
   from {
     opacity: 0;
-    transform: translate3d(0, 12px, 0);
+    transform: translate3d(0, 18px, 0) scale(0.985);
+    filter: blur(10px);
   }
 
   to {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
   }
 }
 
@@ -143,7 +145,9 @@ select {
   }
 
   .page-shell {
-    animation: page-enter 520ms cubic-bezier(0.22, 1, 0.36, 1);
+    animation: page-enter 460ms cubic-bezier(0.22, 1, 0.36, 1);
+    transform-origin: center top;
+    will-change: opacity, transform, filter;
   }
 
   .page-hero {
@@ -379,6 +383,7 @@ select {
   @media (prefers-reduced-motion: reduce) {
     .page-shell {
       animation: none;
+      filter: none;
     }
 
     .reveal-on-scroll,

@@ -18,28 +18,7 @@ const fieldClassName =
 export default function ContactPage() {
   return (
     <div>
-      <SectionContainer className="page-hero pattern-dots pt-8 sm:pt-10">
-        <GlassCard className="spotlight-panel p-6 sm:p-8 lg:p-10">
-          <div className="grid gap-8 lg:grid-cols-[1fr,0.85fr]">
-            <SectionHeader
-              eyebrow="Contact Prime Math Academy"
-              title="พูดคุยกับทีมงานเพื่อเลือกคอร์สที่เหมาะกับเป้าหมายของผู้เรียน"
-              description="หากต้องการคำแนะนำด้านระดับคอร์ส การเตรียมสอบ หรือการวางเส้นทางการเรียนอย่างจริงจัง ทีมงานพร้อมช่วยประเมินเบื้องต้นให้"
-            />
-            <div className="grid gap-4 sm:grid-cols-2">
-              {[
-                ["ตอบไว", "พร้อมช่วยแนะนำคอร์สที่เหมาะกับพื้นฐานจริงของผู้เรียน"],
-                ["ติดต่อสะดวก", "ข้อมูลติดต่อครบถ้วนสำหรับผู้เรียนและผู้ปกครอง"]
-              ].map(([title, description]) => (
-                <div key={title} className="rounded-[24px] bg-white/80 p-5 shadow-sm backdrop-blur">
-                  <p className="text-lg font-semibold text-ink-900">{title}</p>
-                  <p className="mt-2 text-sm leading-7 text-slate-500">{description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </GlassCard>
-      </SectionContainer>
+      
 
       <SectionContainer className="section-contrast">
         <div className="grid gap-8 lg:grid-cols-[1.02fr,0.98fr]">

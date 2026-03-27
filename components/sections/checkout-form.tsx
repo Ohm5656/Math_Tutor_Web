@@ -195,8 +195,8 @@ export function CheckoutForm({ course }: { course: CheckoutCourseSummary }) {
           </p>
           <div className="mt-5 rounded-[28px] bg-[linear-gradient(145deg,#0f172a_0%,#1d4ed8_100%)] px-6 py-6 text-white">
             <p className="text-sm text-white/70">คอร์สที่เลือก</p>
-            <h3 className="mt-3 text-2xl font-semibold leading-tight">{course.title}</h3>
-            <p className="mt-3 text-sm leading-7 text-slate-200">{course.shortDescription}</p>
+            <h3 className="mt-3 text-2xl font-semibold leading-tight text-white [text-shadow:0_10px_28px_rgba(15,23,42,0.28)]">{course.title}</h3>
+            <p className="mt-3 text-sm leading-7 text-white/88">{course.shortDescription}</p>
           </div>
 
           <div className="mt-6 space-y-3 rounded-[24px] bg-slate-50/90 p-5">

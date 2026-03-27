@@ -74,7 +74,7 @@ export default async function CourseDetailPage({ params }: CourseDetailPageProps
                   <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-slate-400">
                     {title}
                   </p>
-                  <p className="mt-3 text-lg font-semibold text-ink-900">{value}</p>
+                  <p className={title === "ราคา" ? "mt-3 text-lg font-semibold text-brand-700" : "mt-3 text-lg font-semibold text-ink-900"}>{value}</p>
                 </div>
               ))}
             </div>
@@ -145,7 +145,7 @@ export default async function CourseDetailPage({ params }: CourseDetailPageProps
               </p>
               <div className="mt-6 rounded-[28px] bg-[linear-gradient(145deg,#0f172a_0%,#1d4ed8_100%)] px-6 py-6 text-white">
                 <p className="text-sm text-white/70">ราคาเรียน</p>
-                <p className="mt-3 text-4xl font-semibold">{formatPrice(course.price)}</p>
+                <p className="mt-3 text-4xl font-semibold text-white [text-shadow:0_10px_30px_rgba(15,23,42,0.32)] sm:text-[2.85rem]">{formatPrice(course.price)}</p>
               </div>
               <div className="mt-6 space-y-3">
                 {[

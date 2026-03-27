@@ -66,7 +66,7 @@ export default function RootLayout({
       <body className={`${bodyFont.variable} ${bodyAltFont.variable} ${headingFont.variable}`}>
         <AppShellEnhancementsLoader />
         <Navbar />
-        <main className="page-shell">{children}</main>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

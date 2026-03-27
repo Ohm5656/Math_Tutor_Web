@@ -53,6 +53,7 @@ export function CourseCard({ course, compactOnMobile = false }: CourseCardProps)
             onClick={() => setIsQuickViewOpen(true)}
             className="absolute inset-0 z-[2] flex items-end justify-end p-3 text-left md:hidden"
           >
+           
           </button>
         ) : null}
 
