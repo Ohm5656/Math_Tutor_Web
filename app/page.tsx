@@ -5,6 +5,7 @@ import { CourseCard } from "@/components/ui/course-card";
 import { ElevationCard } from "@/components/ui/elevation-card";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { GlassCard } from "@/components/ui/glass-card";
+import { HeroEnergyScene } from "@/components/ui/hero-energy-scene";
 import { SectionContainer } from "@/components/ui/section-container";
 import { SectionHeader } from "@/components/ui/section-header";
 import { TestimonialCard } from "@/components/ui/testimonial-card";
@@ -73,34 +74,35 @@ export default function HomePage() {
 
           </div>
 
-          <div className="relative fade-up fade-up-delay-2">
-            <div className="soft-motion absolute -left-8 top-10 h-28 w-28 rounded-full bg-brand-200/50 blur-3xl" />
-            <div className="soft-motion absolute -right-2 bottom-10 h-32 w-32 rounded-full bg-sky-200/45 blur-3xl" />
-
+          <HeroEnergyScene className="fade-up fade-up-delay-2">
             <div className="hero-soft-panel relative overflow-hidden rounded-[28px] border border-white/80 p-3 shadow-[0_40px_100px_-42px_rgba(15,23,42,0.28)] backdrop-blur-xl sm:rounded-[36px] sm:p-5">
-              <div className="hero-device relative overflow-hidden rounded-[24px] px-4 pb-5 pt-6 text-white shadow-[0_32px_70px_-36px_rgba(37,99,235,0.6)] sm:rounded-[32px] sm:px-8 sm:pb-8 sm:pt-8">
+              <div className="hero-device hero-tilt-surface relative overflow-hidden rounded-[24px] px-4 pb-5 pt-6 text-white shadow-[0_32px_70px_-36px_rgba(37,99,235,0.6)] sm:rounded-[32px] sm:px-8 sm:pb-8 sm:pt-8">
+                <div className="hero-sheen absolute inset-0" />
+                <div className="hero-grid-lines absolute inset-0" />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.28),transparent_22%)]" />
-                <div className="relative z-[1] flex items-start justify-between gap-4">
+                <div className="hero-card-layer hero-card-layer-near relative z-[1] flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/70">
+                    <p className="hero-card-layer hero-card-layer-far text-xs font-semibold uppercase tracking-[0.32em] text-white/85 [text-shadow:0_6px_20px_rgba(0,0,0,0.28)]">
                       Prime Math Class
                     </p>
 <h2 className="thai-heading mt-3 text-2xl font-semibold leading-[1.08] text-white sm:mt-4 sm:text-4xl whitespace-nowrap">                      ที่ไหน เมื่อไร<br/>
                       ก็เรียนคณิตได้
                     </h2>
                   </div>
-                  <div className="hero-chip hidden sm:block">
-                    <p className="text-[11px] uppercase tracking-[0.24em] text-white/65">Mode</p>
-                    <p className="mt-2 text-sm font-semibold text-white">Online</p>
+                  <div className="hero-card-layer hero-card-layer-mid hero-chip hidden sm:block">
+                    <p className="text-[11px] uppercase tracking-[0.24em] text-white/78 [text-shadow:0_6px_18px_rgba(0,0,0,0.2)]">Mode</p>
+                    <p className="mt-2 text-sm font-semibold text-white [text-shadow:0_8px_22px_rgba(0,0,0,0.28)]">Online</p>
                   </div>
                 </div>
 
-                <div className="relative z-[1] mt-10 sm:mt-12">
+                <div className="hero-card-layer hero-card-layer-mid relative z-[1] mt-10 sm:mt-12">
                   <div className="max-w-[430px]">
-                    <p className="text-sm font-medium text-white/72">Structured online learning for grades, exams, and confidence.</p>
+                    <p className="text-sm font-medium leading-7 text-white/90 [text-shadow:0_8px_24px_rgba(1,12,22,0.3)] sm:text-[15px]">
+                      Structured online learning for grades, exams, and confidence.
+                    </p>
                   </div>
 
-                  <div className="mt-6 rounded-[28px] border border-white/16 bg-white/12 p-3 backdrop-blur-md sm:mt-8 sm:p-4">
+                  <div className="hero-card-layer hero-card-layer-front mt-6 rounded-[28px] border border-white/16 bg-white/12 p-3 backdrop-blur-md sm:mt-8 sm:p-4">
                     <div className="rounded-[24px] bg-white/95 p-5 text-slate-900 shadow-[0_24px_60px_-30px_rgba(15,23,42,0.34)] sm:p-6">
                       <div className="flex items-start justify-between gap-4">
                         <div>
@@ -112,7 +114,7 @@ export default function HomePage() {
                             กลับมาทบทวนได้ทุกเมื่อ
                           </p>
                         </div>
-                        <div className="rounded-[20px] bg-slate-100 px-4 py-3 text-right">
+                        <div className="hero-card-layer hero-card-layer-far rounded-[20px] bg-slate-100 px-4 py-3 text-right">
                           <p className="text-[11px] uppercase tracking-[0.22em] text-slate-400">Access</p>
                           <p className="mt-2 text-lg font-semibold text-brand-700">24 ชม.</p>
                         </div>
@@ -124,7 +126,7 @@ export default function HomePage() {
                           ["ฝึกโจทย์", "Smart Practice"],
                           ["ก่อนสอบ", "Exam Ready"]
                         ].map(([title, text]) => (
-                          <div key={title} className="hero-metric-card">
+                          <div key={title} className="hero-card-layer hero-card-layer-far hero-metric-card">
                             <p className="text-sm font-semibold text-ink-900">{title}</p>
                             <p className="mt-2 text-sm text-slate-500">{text}</p>
                           </div>
@@ -137,7 +139,7 @@ export default function HomePage() {
         
               </div>
             </div>
-          </div>
+          </HeroEnergyScene>
         </div>
       </SectionContainer>
 

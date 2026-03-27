@@ -26,7 +26,7 @@ export function SectionHeader({
       {eyebrow ? <span className="eyebrow">{eyebrow}</span> : null}
       <h2
         className={cn(
-          "thai-heading text-balance mt-4 text-[1.9rem] font-semibold leading-[1.15] sm:mt-5 sm:text-[2.3rem] sm:leading-[1.16] lg:text-[2.5rem]",
+          "section-title-glow thai-heading text-balance mt-4 text-[1.9rem] font-semibold leading-[1.15] sm:mt-5 sm:text-[2.3rem] sm:leading-[1.16] lg:text-[2.5rem]",
           align === "center" ? "mx-auto max-w-[16ch]" : "max-w-[18ch]"
         )}
       >

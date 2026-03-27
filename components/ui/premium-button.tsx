@@ -17,9 +17,9 @@ type PremiumButtonProps = {
 
 const variantClasses = {
   primary:
-    "bg-[linear-gradient(135deg,#0f172a_0%,#1d4ed8_62%,#2563eb_100%)] text-white shadow-glow hover:-translate-y-0.5 hover:scale-[1.015] hover:shadow-[0_24px_56px_-22px_rgba(37,99,235,0.5)]",
+    "bg-[linear-gradient(135deg,#0f172a_0%,#0b3b2f_26%,#1d4ed8_72%,#2563eb_100%)] text-white shadow-glow hover:-translate-y-0.5 hover:scale-[1.018] hover:shadow-[0_28px_60px_-24px_rgba(37,99,235,0.46)] hover:saturate-[1.08]",
   secondary:
-    "border border-slate-200/80 bg-white/90 text-ink-900 shadow-[0_14px_30px_-20px_rgba(15,23,42,0.16)] hover:-translate-y-0.5 hover:scale-[1.015] hover:border-slate-300 hover:shadow-panel",
+    "border border-slate-200/80 bg-white/90 text-ink-900 shadow-[0_14px_30px_-20px_rgba(15,23,42,0.16)] hover:-translate-y-0.5 hover:scale-[1.015] hover:border-emerald-200 hover:shadow-[0_20px_48px_-24px_rgba(0,224,255,0.28)]",
   ghost:
     "bg-transparent text-slate-700 hover:bg-white/70 hover:text-ink-900",
   dark:
@@ -46,7 +46,7 @@ export function PremiumButton({
   const sharedClassName = cn(
     "group inline-flex items-center justify-center rounded-2xl font-semibold transition duration-300 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60",
     "before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:opacity-0 before:transition before:duration-300 hover:before:opacity-100",
-    "relative overflow-hidden",
+    "relative overflow-hidden before:bg-[radial-gradient(circle_at_center,rgba(0,255,136,0.18),transparent_60%)]",
     variantClasses[variant],
     sizeClasses[size],
     className
