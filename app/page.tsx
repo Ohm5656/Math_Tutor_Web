@@ -6,12 +6,13 @@ import { ElevationCard } from "@/components/ui/elevation-card";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { GlassCard } from "@/components/ui/glass-card";
 import { HeroEnergyScene } from "@/components/ui/hero-energy-scene";
+import { NeonOrbField } from "@/components/ui/neon-orb-field";
 import { SectionContainer } from "@/components/ui/section-container";
 import { SectionHeader } from "@/components/ui/section-header";
 import { TestimonialCard } from "@/components/ui/testimonial-card";
 import { courses } from "@/data/courses";
-import { siteFaqs, testimonials, trustPoints, tutors } from "@/data/site";
-import { cn } from "@/lib/utils";
+import { siteFaqs, testimonials } from "@/data/site";
+import { formatPrice } from "@/lib/utils";
 
 const featureCards = [
   {
@@ -36,13 +37,52 @@ const featureCards = [
   }
 ];
 
+const heroJourneyHighlights = [
+  ["ปรับพื้นฐาน", "Clear Basics"],
+  ["ฝึกโจทย์", "Smart Practice"],
+  ["ก่อนสอบ", "Exam Ready"]
+] as const;
+
+const heroFloatingOrbs = [
+  "hero-floating-orb-a",
+  "hero-floating-orb-b",
+  "hero-floating-orb-c",
+  "hero-floating-orb-d",
+  "hero-floating-orb-e",
+  "hero-floating-orb-f"
+] as const;
+
 export default function HomePage() {
   const featuredCourses = courses.filter((course) => course.featured);
+  const heroCourseShowcase = featuredCourses.slice(0, 6);
+  const heroSignals = [
+    {
+      label: "Featured",
+      value: `6 คอร์ส`,
+      description: "คอร์สเด่นที่คัดมาแล้วว่าตอบโจทย์ผู้เรียนได้จริงในแต่ละช่วงชั้น"
+    },
+    {
+      label: "Levels",
+      value: "ประถม-มัธยมปลาย",
+      description: "ครอบคลุมตั้งแต่ปูพื้นฐานถึงเตรียมสอบ"
+    },
+    {
+      label: "Access",
+      value: "Replay",
+      description: "เรียนและกลับมาทบทวนตามจังหวะตัวเอง"
+    }
+  ];
 
   return (
     <div>
       <SectionContainer className="page-hero pattern-dots overflow-hidden pt-8 sm:pt-10">
-        <div className="grid items-center gap-8 lg:grid-cols-[0.94fr,1.06fr] lg:gap-10">
+        <div className="hero-floating-field" aria-hidden="true">
+          {heroFloatingOrbs.map((orbClass) => (
+            <span key={orbClass} className={`hero-floating-orb ${orbClass}`} />
+          ))}
+        </div>
+
+        <div className="relative z-[1] grid items-center gap-8 lg:grid-cols-[0.94fr,1.06fr] lg:gap-10">
           <div className="relative">
             <span className="eyebrow fade-up">Prime Math Academy</span>
             <p className="fade-up fade-up-delay-1 mt-5 max-w-none text-[2rem] font-semibold leading-none text-brand-600 sm:mt-7 sm:max-w-none sm:text-5xl">
@@ -75,68 +115,128 @@ export default function HomePage() {
           </div>
 
           <HeroEnergyScene className="fade-up fade-up-delay-2">
-            <div className="hero-soft-panel relative overflow-hidden rounded-[28px] border border-white/80 p-3 shadow-[0_40px_100px_-42px_rgba(15,23,42,0.28)] backdrop-blur-xl sm:rounded-[36px] sm:p-5">
-              <div className="hero-device hero-tilt-surface relative overflow-hidden rounded-[24px] px-4 pb-5 pt-6 text-white shadow-[0_32px_70px_-36px_rgba(37,99,235,0.6)] sm:rounded-[32px] sm:px-8 sm:pb-8 sm:pt-8">
+            <div className="hero-soft-panel relative overflow-hidden rounded-[28px] border border-white/80 p-2.5 shadow-[0_40px_100px_-42px_rgba(15,23,42,0.28)] backdrop-blur-xl sm:rounded-[36px] sm:p-4">
+              <div className="hero-device hero-tilt-surface relative overflow-hidden rounded-[24px] px-4 pb-4 pt-5 text-white shadow-[0_32px_70px_-36px_rgba(37,99,235,0.6)] sm:rounded-[32px] sm:px-7 sm:pb-6 sm:pt-7">
                 <div className="hero-sheen absolute inset-0" />
                 <div className="hero-grid-lines absolute inset-0" />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.28),transparent_22%)]" />
+
                 <div className="hero-card-layer hero-card-layer-near relative z-[1] flex items-start justify-between gap-4">
                   <div>
                     <p className="hero-card-layer hero-card-layer-far text-xs font-semibold uppercase tracking-[0.32em] text-white/85 [text-shadow:0_6px_20px_rgba(0,0,0,0.28)]">
                       Prime Math Class
                     </p>
-<h2 className="thai-heading mt-3 text-2xl font-semibold leading-[1.08] text-white sm:mt-4 sm:text-4xl whitespace-nowrap">                      ที่ไหน เมื่อไร<br/>
+                    <h2 className="thai-heading mt-3 text-2xl font-semibold leading-[1.08] text-white sm:mt-4 sm:text-4xl">
+                      ที่ไหน เมื่อไร
+                      <br />
                       ก็เรียนคณิตได้
                     </h2>
                   </div>
+
                   <div className="hero-card-layer hero-card-layer-mid hero-chip hidden sm:block">
                     <p className="text-[11px] uppercase tracking-[0.24em] text-white/78 [text-shadow:0_6px_18px_rgba(0,0,0,0.2)]">Mode</p>
                     <p className="mt-2 text-sm font-semibold text-white [text-shadow:0_8px_22px_rgba(0,0,0,0.28)]">Online</p>
                   </div>
                 </div>
 
-                <div className="hero-card-layer hero-card-layer-mid relative z-[1] mt-10 sm:mt-12">
-                  <div className="max-w-[430px]">
+                <div className="relative z-[1] mt-7 sm:mt-8">
+                  <div className="hero-card-layer hero-card-layer-mid max-w-[28rem]">
                     <p className="text-sm font-medium leading-7 text-white/90 [text-shadow:0_8px_24px_rgba(1,12,22,0.3)] sm:text-[15px]">
-                      Structured online learning for grades, exams, and confidence.
+                      เลือกคอร์สคณิตที่เหมาะกับช่วงชั้น เป้าหมาย และสไตล์การเรียนของผู้เรียนได้ในที่เดียว
                     </p>
                   </div>
 
-                  <div className="hero-card-layer hero-card-layer-front mt-6 rounded-[28px] border border-white/16 bg-white/12 p-3 backdrop-blur-md sm:mt-8 sm:p-4">
-                    <div className="rounded-[24px] bg-white/95 p-5 text-slate-900 shadow-[0_24px_60px_-30px_rgba(15,23,42,0.34)] sm:p-6">
-                      <div className="flex items-start justify-between gap-4">
-                        <div>
-                          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
-                            Student Journey
-                          </p>
-                          <p className="text-balance mt-3 max-w-[16ch] text-lg font-semibold leading-snug text-slate-900 sm:text-[1.35rem]">
-                            เรียนเป็นลำดับ <br/>เห็นผลชัด<br/>
-                            กลับมาทบทวนได้ทุกเมื่อ
-                          </p>
+                  <div className="hero-card-layer hero-card-layer-front hero-orb-panel mt-5 sm:mt-6">
+                    <div className="hero-orb-stage">
+                      <div className="hero-orb-ambient hero-orb-ambient-a" />
+                      <div className="hero-orb-ambient hero-orb-ambient-b" />
+                      <div className="hero-orb-floor" />
+                      <div className="hero-orb-shadow" />
+                      <div className="hero-orb-ring hero-orb-ring-a" />
+                      <div className="hero-orb-ring hero-orb-ring-b" />
+                      <div className="hero-orb-ring hero-orb-ring-c" />
+
+                      <div className="hero-orb-sphere">
+                        <div className="hero-orb-glow" />
+                        <div className="hero-orb-core">
+                          <div className="hero-orb-inner" />
+                          <div className="hero-orb-highlight" />
                         </div>
-                        <div className="hero-card-layer hero-card-layer-far rounded-[20px] bg-slate-100 px-4 py-3 text-right">
-                          <p className="text-[11px] uppercase tracking-[0.22em] text-slate-400">Access</p>
-                          <p className="mt-2 text-lg font-semibold text-brand-700">24 ชม.</p>
-                        </div>
+                        <div className="hero-orb-shell" />
                       </div>
 
-                      <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                        {[
-                          ["ปรับพื้นฐาน", "Clear Basics"],
-                          ["ฝึกโจทย์", "Smart Practice"],
-                          ["ก่อนสอบ", "Exam Ready"]
-                        ].map(([title, text]) => (
-                          <div key={title} className="hero-card-layer hero-card-layer-far hero-metric-card">
-                            <p className="text-sm font-semibold text-ink-900">{title}</p>
-                            <p className="mt-2 text-sm text-slate-500">{text}</p>
-                          </div>
-                        ))}
+                      <div className="hero-orb-satellite hero-orb-satellite-a" />
+                      <div className="hero-orb-satellite hero-orb-satellite-b" />
+                      <div className="hero-orb-satellite hero-orb-satellite-c" />
+
+                      <div className="hero-orb-copy">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/68">Featured Courses</p>
+                        <p className="mt-3 text-lg font-semibold text-white sm:text-[1.4rem]">คอร์สคณิตแนะนำในเว็บไซต์</p>
+                        <div className="mt-3 space-y-2.5">
+                          {heroCourseShowcase.map((course) => (
+                            <div key={course.id} className="hero-course-preview-card">
+                              <div className="flex items-start justify-between gap-3">
+                                <div className="min-w-0">
+                                  <p className="text-[10px] uppercase tracking-[0.24em] text-emerald-100/72">{course.category}</p>
+                                  <p className="mt-1 text-sm font-semibold leading-5 text-white">{course.title}</p>
+                                </div>
+                                <p className="whitespace-nowrap text-xs font-semibold text-emerald-50/86">
+                                  {formatPrice(course.price)}
+                                </p>
+                              </div>
+                              <p className="mt-1.5 text-[11px] leading-5 text-white/70">
+                                {course.level} • {course.duration}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
+
+                  <div className="hero-signal-strip hero-card-layer hero-card-layer-mid mt-3.5 sm:mt-4">
+                    {heroSignals.map((signal) => (
+                      <div key={signal.label} className="hero-signal-card">
+                        <p className="text-[10px] uppercase tracking-[0.24em] text-emerald-50/80">{signal.label}</p>
+                        <p className="mt-1.5 text-base font-semibold text-white sm:text-lg">{signal.value}</p>
+                        <p className="mt-1.5 text-[11px] leading-5 text-white/90 sm:text-xs">{signal.description}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
-        
+                <div className="hero-card-layer hero-card-layer-front mt-4 rounded-[28px] border border-white/16 bg-white/12 p-2.5 backdrop-blur-md sm:mt-5 sm:p-3">
+                  <div className="rounded-[24px] bg-white/95 p-4 text-slate-900 shadow-[0_24px_60px_-30px_rgba(15,23,42,0.34)] sm:p-5">
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
+                          Student Journey
+                        </p>
+                        <p className="text-balance mt-2.5 max-w-[17ch] text-base font-semibold leading-snug text-slate-900 sm:text-[1.18rem]">
+                          เรียนเป็นลำดับ
+                          <br />
+                          เห็นผลชัด
+                          <br />
+                          กลับมาทบทวนได้ทุกเมื่อ
+                        </p>
+                      </div>
+
+                      <div className="hero-card-layer hero-card-layer-far rounded-[20px] bg-slate-100 px-4 py-3 text-right">
+                        <p className="text-[11px] uppercase tracking-[0.22em] text-slate-400">Access</p>
+                        <p className="mt-2 text-lg font-semibold text-brand-700">24 ชม.</p>
+                      </div>
+                    </div>
+
+                    <div className="hero-journey-grid mt-4 grid gap-2.5 sm:grid-cols-3">
+                      {heroJourneyHighlights.map(([title, text]) => (
+                        <div key={title} className="hero-card-layer hero-card-layer-far hero-metric-card">
+                          <p className="text-sm font-semibold text-ink-900">{title}</p>
+                          <p className="mt-2 text-sm text-slate-500">{text}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </HeroEnergyScene>
@@ -163,21 +263,24 @@ export default function HomePage() {
         </div>
       </SectionContainer>
 
-      <SectionContainer>
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <SectionHeader
-            eyebrow="Course Collection"
-            title=""
-            description=""
-          />
-          <PremiumButton href="/courses" variant="secondary">
-            ดูคอร์สทั้งหมด
-          </PremiumButton>
-        </div>
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {featuredCourses.map((course) => (
-            <CourseCard key={course.id} course={course} />
-          ))}
+      <SectionContainer className="relative isolate overflow-hidden">
+        <NeonOrbField variant="course-showcase" />
+        <div className="relative z-[1]">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <SectionHeader
+              eyebrow="Course Collection"
+              title=""
+              description=""
+            />
+            <PremiumButton href="/courses" variant="secondary">
+              ดูคอร์สทั้งหมด
+            </PremiumButton>
+          </div>
+          <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {featuredCourses.map((course) => (
+              <CourseCard key={course.id} course={course} />
+            ))}
+          </div>
         </div>
       </SectionContainer>
 
@@ -201,8 +304,9 @@ export default function HomePage() {
         </div>
       </SectionContainer>
 
-      <SectionContainer className="section-contrast">
-        <div className="grid gap-10 lg:grid-cols-[0.88fr,1.12fr]">
+      <SectionContainer className="section-contrast relative isolate overflow-hidden">
+        <NeonOrbField variant="faq-section" />
+        <div className="relative z-[1] grid gap-10 lg:grid-cols-[0.88fr,1.12fr]">
           <SectionHeader
             eyebrow="FAQ"
             title="คำถามสำคัญก่อนเริ่มเรียน"

@@ -27,7 +27,18 @@ const clamp = (value: number, min: number, max: number) => Math.min(max, Math.ma
 
 export function HeroEnergyScene({ children, className }: HeroEnergySceneProps) {
   const sceneRef = useRef<HTMLDivElement | null>(null);
-  const frameRef = useRef<number | null>(null);
+  const scrollFrameRef = useRef<number | null>(null);
+  const pointerFrameRef = useRef<number | null>(null);
+  const prefersReducedMotionRef = useRef(false);
+  const interactivePointerRef = useRef(false);
+  const pointerStateRef = useRef({
+    pointerX: "50%",
+    pointerY: "50%",
+    shiftX: "0",
+    shiftY: "0",
+    tiltX: "0deg",
+    tiltY: "0deg"
+  });
 
   const particleStyles = useMemo(
     () =>
@@ -50,7 +61,21 @@ export function HeroEnergyScene({ children, className }: HeroEnergySceneProps) {
       return;
     }
 
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const pointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    prefersReducedMotionRef.current = motionQuery.matches;
+    interactivePointerRef.current = pointerQuery.matches;
+
+    const applyPointerState = () => {
+      const { pointerX, pointerY, shiftX, shiftY, tiltX, tiltY } = pointerStateRef.current;
+
+      scene.style.setProperty("--pointer-x", pointerX);
+      scene.style.setProperty("--pointer-y", pointerY);
+      scene.style.setProperty("--pointer-shift-x", shiftX);
+      scene.style.setProperty("--pointer-shift-y", shiftY);
+      scene.style.setProperty("--card-tilt-x", tiltX);
+      scene.style.setProperty("--card-tilt-y", tiltY);
+    };
 
     const updateScroll = () => {
       const rect = scene.getBoundingClientRect();
@@ -62,23 +87,31 @@ export function HeroEnergyScene({ children, className }: HeroEnergySceneProps) {
       scene.style.setProperty("--hero-scroll-shift", `${drift.toFixed(2)}px`);
     };
 
-    if (!prefersReducedMotion) {
+    if (!prefersReducedMotionRef.current) {
       updateScroll();
+      applyPointerState();
 
       const handleScroll = () => {
-        if (frameRef.current !== null) {
-          cancelAnimationFrame(frameRef.current);
+        if (scrollFrameRef.current !== null) {
+          cancelAnimationFrame(scrollFrameRef.current);
         }
 
-        frameRef.current = window.requestAnimationFrame(updateScroll);
+        scrollFrameRef.current = window.requestAnimationFrame(() => {
+          scrollFrameRef.current = null;
+          updateScroll();
+        });
       };
 
       window.addEventListener("scroll", handleScroll, { passive: true });
       window.addEventListener("resize", handleScroll);
 
       return () => {
-        if (frameRef.current !== null) {
-          cancelAnimationFrame(frameRef.current);
+        if (scrollFrameRef.current !== null) {
+          cancelAnimationFrame(scrollFrameRef.current);
+        }
+
+        if (pointerFrameRef.current !== null) {
+          cancelAnimationFrame(pointerFrameRef.current);
         }
 
         window.removeEventListener("scroll", handleScroll);
@@ -93,13 +126,7 @@ export function HeroEnergyScene({ children, className }: HeroEnergySceneProps) {
   const updatePointer = (event: PointerEvent<HTMLDivElement>) => {
     const scene = sceneRef.current;
 
-    if (!scene) {
-      return;
-    }
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (prefersReducedMotion) {
+    if (!scene || prefersReducedMotionRef.current || !interactivePointerRef.current || event.pointerType !== "mouse") {
       return;
     }
 
@@ -108,13 +135,49 @@ export function HeroEnergyScene({ children, className }: HeroEnergySceneProps) {
     const relativeY = (event.clientY - bounds.top) / bounds.height;
     const centeredX = relativeX - 0.5;
     const centeredY = relativeY - 0.5;
+    const nextPointerX = `${(relativeX * 100).toFixed(2)}%`;
+    const nextPointerY = `${(relativeY * 100).toFixed(2)}%`;
+    const nextShiftX = centeredX.toFixed(3);
+    const nextShiftY = centeredY.toFixed(3);
+    const nextTiltX = `${(-centeredY * 12).toFixed(2)}deg`;
+    const nextTiltY = `${(centeredX * 16).toFixed(2)}deg`;
+    const previousState = pointerStateRef.current;
 
-    scene.style.setProperty("--pointer-x", `${(relativeX * 100).toFixed(2)}%`);
-    scene.style.setProperty("--pointer-y", `${(relativeY * 100).toFixed(2)}%`);
-    scene.style.setProperty("--pointer-shift-x", centeredX.toFixed(3));
-    scene.style.setProperty("--pointer-shift-y", centeredY.toFixed(3));
-    scene.style.setProperty("--card-tilt-x", `${(-centeredY * 12).toFixed(2)}deg`);
-    scene.style.setProperty("--card-tilt-y", `${(centeredX * 16).toFixed(2)}deg`);
+    if (
+      previousState.pointerX === nextPointerX &&
+      previousState.pointerY === nextPointerY &&
+      previousState.shiftX === nextShiftX &&
+      previousState.shiftY === nextShiftY &&
+      previousState.tiltX === nextTiltX &&
+      previousState.tiltY === nextTiltY
+    ) {
+      return;
+    }
+
+    pointerStateRef.current = {
+      pointerX: nextPointerX,
+      pointerY: nextPointerY,
+      shiftX: nextShiftX,
+      shiftY: nextShiftY,
+      tiltX: nextTiltX,
+      tiltY: nextTiltY
+    };
+
+    if (pointerFrameRef.current !== null) {
+      cancelAnimationFrame(pointerFrameRef.current);
+    }
+
+    pointerFrameRef.current = window.requestAnimationFrame(() => {
+      pointerFrameRef.current = null;
+      const { pointerX, pointerY, shiftX, shiftY, tiltX, tiltY } = pointerStateRef.current;
+
+      scene.style.setProperty("--pointer-x", pointerX);
+      scene.style.setProperty("--pointer-y", pointerY);
+      scene.style.setProperty("--pointer-shift-x", shiftX);
+      scene.style.setProperty("--pointer-shift-y", shiftY);
+      scene.style.setProperty("--card-tilt-x", tiltX);
+      scene.style.setProperty("--card-tilt-y", tiltY);
+    });
   };
 
   const resetPointer = () => {
@@ -122,6 +185,20 @@ export function HeroEnergyScene({ children, className }: HeroEnergySceneProps) {
 
     if (!scene) {
       return;
+    }
+
+    pointerStateRef.current = {
+      pointerX: "50%",
+      pointerY: "50%",
+      shiftX: "0",
+      shiftY: "0",
+      tiltX: "0deg",
+      tiltY: "0deg"
+    };
+
+    if (pointerFrameRef.current !== null) {
+      cancelAnimationFrame(pointerFrameRef.current);
+      pointerFrameRef.current = null;
     }
 
     scene.style.setProperty("--pointer-x", "50%");

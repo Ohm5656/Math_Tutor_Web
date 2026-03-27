@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { NeonOrbField } from "@/components/ui/neon-orb-field";
 import { BrandMark } from "@/components/ui/brand-mark";
 import { contactInfo } from "@/data/site";
 
@@ -20,8 +21,9 @@ export function Footer() {
   return (
     <footer className="section-space pb-8 pt-0">
       <div className="app-shell">
-        <div className="overflow-hidden rounded-[38px] bg-[linear-gradient(145deg,#4f86f7_0%,#3b82f6_48%,#2563eb_100%)] text-white shadow-[0_42px_120px_-56px_rgba(37,99,235,0.7)]">
-          <div className="grid gap-10 px-6 py-10 sm:px-8 lg:grid-cols-[1.1fr,0.9fr] lg:px-10 lg:py-12">
+        <div className="relative isolate overflow-hidden rounded-[38px] bg-[linear-gradient(145deg,#4f86f7_0%,#3b82f6_48%,#2563eb_100%)] text-white shadow-[0_42px_120px_-56px_rgba(37,99,235,0.7)]">
+          <NeonOrbField variant="footer" className="footer-orb-field" />
+          <div className="relative z-[1] grid gap-10 px-6 py-10 sm:px-8 lg:grid-cols-[1.1fr,0.9fr] lg:px-10 lg:py-12">
             <div className="reveal-on-scroll reveal-left">
               <div className="flex items-center gap-3">
                 <BrandMark />
@@ -83,7 +85,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="border-t border-white/12 px-6 py-4 text-sm text-white/70 sm:px-8 lg:px-10">
+          <div className="relative z-[1] border-t border-white/12 px-6 py-4 text-sm text-white/70 sm:px-8 lg:px-10">
             © 2026 Prime Math Academy. All rights reserved.
           </div>
         </div>
