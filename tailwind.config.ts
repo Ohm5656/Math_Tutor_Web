@@ -71,8 +71,8 @@ const config: Config = {
           "50%": { opacity: "1", transform: "scale(1.04)" }
         },
         fadeUp: {
-          "0%": { opacity: "0", transform: "translateY(18px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" }
+          "0%": { opacity: "0", transform: "translateY(18px) translateZ(0)", filter: "blur(0.5px)" },
+          "100%": { opacity: "1", transform: "translateY(0) translateZ(0)", filter: "blur(0px)" }
         },
         drift: {
           "0%, 100%": { transform: "translate3d(0,0,0)" },

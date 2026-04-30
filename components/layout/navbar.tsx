@@ -15,9 +15,9 @@ const navItems = [
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-50 px-3 pt-3 sm:px-4">
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur-md">
       <div className="app-shell">
-        <div className="glass-card pattern-dots relative flex h-[78px] items-center justify-between gap-4 px-4 sm:px-5">
+        <div className="relative flex h-20 items-center justify-between gap-4">
           <div className="absolute inset-x-8 top-0 h-px animated-border" />
 
           <Link href="/" className="group flex items-center gap-3">
