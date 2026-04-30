@@ -32,7 +32,7 @@ export function CourseCard({ course, compactOnMobile = false }: CourseCardProps)
   const posterTheme = posterThemeByCategory[course.category] ?? "course-poster";
 
   return (
-    <ElevationCard hover className="group flex h-full min-w-0 flex-col overflow-hidden p-0">
+    <ElevationCard hover className="group flex h-full min-w-0 flex-col overflow-hidden p-0 [content-visibility:auto] [contain-intrinsic-size:0_392px]">
       <div
         className={cn(
           "relative isolate overflow-hidden",
@@ -51,6 +51,7 @@ export function CourseCard({ course, compactOnMobile = false }: CourseCardProps)
             aria-expanded={isQuickViewOpen}
             aria-controls={mobilePanelId}
             onClick={() => setIsQuickViewOpen(true)}
+            aria-label={`ดูรายละเอียดคอร์ส ${course.title} อย่างย่อ`}
             className="absolute inset-0 z-[2] flex items-end justify-end p-3 text-left md:hidden"
           >
            
@@ -225,7 +226,6 @@ export function CourseCard({ course, compactOnMobile = false }: CourseCardProps)
           <div className="flex w-full flex-col gap-2.5 sm:w-auto sm:items-end">
             <Link
               href={`/courses/${course.slug}`}
-              prefetch={false}
               className={cn(
                 "font-semibold text-ink-900 transition duration-300 group-hover:text-brand-700 sm:text-right",
                 compactOnMobile ? "text-[13px] sm:text-sm" : "text-sm"
@@ -236,7 +236,6 @@ export function CourseCard({ course, compactOnMobile = false }: CourseCardProps)
             <PremiumButton
               href={`/checkout?course=${course.slug}`}
               size="sm"
-              prefetch={false}
               className={cn("w-full sm:w-auto", compactOnMobile && "h-9 px-3.5 text-[13px]")}
             >
               สมัครเรียน

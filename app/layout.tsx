@@ -65,8 +65,9 @@ export default function RootLayout({
     <html lang="th" data-scroll-behavior="smooth">
       <body className={`${bodyFont.variable} ${bodyAltFont.variable} ${headingFont.variable}`}>
         <AppShellEnhancementsLoader />
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-brand-600 focus:text-white">ข้ามไปยังเนื้อหาหลัก</a>
         <Navbar />
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <Footer />
       </body>
     </html>

@@ -48,7 +48,6 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
                   <Link
                     key={category}
                     href={href}
-                    prefetch={false}
                     className={cn(
                       "snap-start whitespace-nowrap rounded-2xl px-4 py-3 text-sm font-semibold transition duration-300 sm:px-5",
                       isActive
